@@ -1,0 +1,505 @@
+flows = [
+  {
+    name                = "Pizza Delivery Journey"
+    incident_preference = "PER_CONDITION"
+    tags = {
+      demo = ["pizza-delivery-1"]
+    }
+    timing = {
+      minute_threshold = 5  # Trigger 5 minutes after the hour
+      critical_value   = 15 # Return 15 for critical
+      warning_value    = 12 # Return 12 for warning
+      normal_value     = 2  # Return 2 for normal (and at other times)
+    }
+    stages = [
+      {
+        stage = "Marketing"
+        levels = [
+
+          { // Level 1
+            steps = [
+              {
+                title = "Social media"
+                signals = [
+                  {
+                    name  = "Facebook Ads"
+                    state = "normal"
+                  },
+                  {
+                    name  = "X"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Tiktok/Snapchat Ads"
+                    state = "normal"
+                  },
+                ]
+              },
+              {
+                title = "TV / Radio"
+                signals = [
+                  {
+                    name  = "Terrestrial broadcast"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Streaming networks"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Commercial radio"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          },
+          { // Level 2
+            steps = [
+              {
+                title = "Email marketing"
+                signals = [
+                  {
+                    name  = "Loyalty emails"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Global campaigns"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "SMS / Mobile Push"
+                signals = [
+                  {
+                    name  = "SMS Bridge (Loyalty)"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Push notifications (Apple)"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Push notifications (Android)"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          },
+        ]
+      },
+      {
+        stage = "Login / Registration"
+        levels = [
+
+          { // Level 1
+            steps = [
+              {
+                title = "Signup"
+                signals = [
+                  {
+                    name  = "User service"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Registration service"
+                    state = "warning"
+                  },
+                  {
+                    name  = "User Bot Protection"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Store Location"
+                signals = [
+                  {
+                    name  = "Geo location"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Branch roster"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          },
+          { // Level 2
+            steps = [
+              {
+                title = "Login"
+                signals = [
+                  {
+                    name  = "Recaptcha"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Login service"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "MFA"
+                signals = [
+                  {
+                    name  = "MFA service"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Fraud & Password services"
+                signals = [
+                  {
+                    name  = "Fraud protection"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Password management"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          },
+        ]
+      },
+      {
+        stage = "Browse"
+        levels = [
+
+          { // Level 1
+            steps = [
+              {
+                title = "Search & Filter"
+                signals = [
+                  {
+                    name  = "Search service"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Filter builder"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Auto-comoplete"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Menu Browse"
+                signals = [
+                  {
+                    name  = "PLP Service"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Product data"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Product Media"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Taxonomy"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Pricing service"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Product Customiser"
+                signals = [
+                  {
+                    name  = "Customiser service"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          },
+          { // Level 2
+            steps = [
+              {
+                title = "Inline Marketing"
+                signals = [
+                  {
+                    name  = "Context Ads"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Recommended accomps"
+                    state = "critcial"
+                  },
+                  {
+                    name  = "Temporal campaigns"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Deal Finder"
+                signals = [
+                  {
+                    name  = "Deal builder"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Whats New"
+                signals = [
+                  {
+                    name  = "Whats new service"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          },
+        ]
+      },
+      {
+        stage = "Basket Build"
+        levels = [
+
+          { // Level 1
+            steps = [
+              {
+                title = "Basket"
+                signals = [
+                  {
+                    name  = "Basket service"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Availability svc"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Totaliser"
+                    state = "normal"
+                  },
+                ]
+              },
+              {
+                title = "Deals"
+                signals = [
+                  {
+                    name  = "Deal Generator"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Best fit deals"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Vouchers"
+                signals = [
+                  {
+                    name  = "Voucher verify"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Voucher supply"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          },
+          { // Level 2
+            steps = [
+              {
+                title = "Favorites"
+                signals = [
+                  {
+                    name  = "Favourites recommender"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Fav cache service"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Recs / Upsells"
+                signals = [
+                  {
+                    name  = "Recommendations"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Upsell wizards"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          },
+          { // Level 3
+            steps = [
+              {
+                title = "Group Order"
+                signals = [
+                  {
+                    name  = "Group order system"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        stage = "Payment & Loyalty"
+        levels = [
+
+          { // Level 1
+            steps = [
+              {
+                title = "Checkout"
+                signals = [
+                  {
+                    name  = "Checkout service"
+                    state = "warning"
+                  },
+                  {
+                    name  = "Duplicate check"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Loyalty Price service"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Payment"
+                signals = [
+                  {
+                    name  = "Mobile Payemnt Gateway"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Worldpay"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Apple Pay"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Previous Orders"
+                signals = [
+                  {
+                    name  = "Order history"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        stage = "Store Fulfilment"
+        levels = [
+
+          { // Level 1
+            steps = [
+              {
+                title = "Order Manager"
+                signals = [
+                  {
+                    name  = "Order manager"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Branch allocator"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Order Tracker"
+                signals = [
+                  {
+                    name  = "Order tracking (instore)"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        stage = "Delivery / Collect"
+        levels = [
+
+          { // Level 1
+            steps = [
+              {
+                title = "Delivery tracker"
+                signals = [
+                  {
+                    name  = "Delivery tracker (customer)"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Delivery locator"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Routing/Mapping"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Delivery Platforms"
+                signals = [
+                  {
+                    name  = "Uber Eats"
+                    state = "normal"
+                  },
+                  {
+                    name  = "Deliveroo"
+                    state = "normal"
+                  }
+                ]
+              },
+              {
+                title = "Collection"
+                signals = [
+                  {
+                    name  = "Store Collect Screen"
+                    state = "normal"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+
+    ]
+  }
+]
